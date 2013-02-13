@@ -146,9 +146,6 @@ int main(int argc, char **argv) {
         printf("  \"%s\": %"PRIu64",\n", "requests", cfg.requests);
         printf("  \"%s\": %"PRIu64",\n", "threads", cfg.threads);
         printf("  \"%s\": %"PRIu64",\n", "connections", cfg.connections);
-    } else {
-        printf("Making %"PRIu64" requests to %s\n", cfg.requests, url);
-        printf("  %"PRIu64" threads and %"PRIu64" connections\n", cfg.threads, cfg.connections);
     }
 
     uint64_t start    = time_us();
@@ -184,7 +181,7 @@ int main(int argc, char **argv) {
 
     char *runtime_msg = format_time_us(runtime_us);
 
-    if (!cfg.json) printf("  %"PRIu64" requests in %s, %sB read\n", complete, runtime_msg, format_binary(bytes));
+    if (!cfg.json) printf("\n   %"PRIu64" requests in %s, %sB read\n", complete, runtime_msg, format_binary(bytes));
     if (errors.connect || errors.read || errors.write || errors.timeout) {
         printf("  Socket errors: connect %d, read %d, write %d, timeout %d\n",
                errors.connect, errors.read, errors.write, errors.timeout);
